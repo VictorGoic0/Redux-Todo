@@ -18,20 +18,33 @@ const list = [
     task: 'Create TodoList',
     id: 1528817084395,
     completed: false
+  },
+  {
+    task: 'Learn Redux',
+    id: 1528817084975,
+    completed: false
   }
 ];
 
 class App extends Component {
   state = {
-    list: list
+    todos: [],
+    task: ''
+  }
+
+  handleChanges = e => {
+    console.log(this.state)
+    this.setState({
+      [e.target.name]: e.target.value
+    })
   }
 
   render() {
     return (
       <div className="container">
         <h1>ToDo List</h1>
-        <TodoList list={this.state.list} />
-        <TodoForm />
+        <TodoList list={list} />
+        <TodoForm handleChanges={this.handleChanges} />
         <button>Clear Completed</button>
       </div>
     );
