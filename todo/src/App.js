@@ -1,25 +1,38 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import TodoForm from './components/TodoForm';
+import TodoList from './components/TodoList';
+
+const list = [
+  {
+    task: 'Organize Garage',
+    id: 1528817077286,
+    completed: false
+  },
+  {
+    task: 'Bake Cookies',
+    id: 1528817084358,
+    completed: false
+  },
+  {
+    task: 'Create TodoList',
+    id: 1528817084395,
+    completed: false
+  }
+];
 
 class App extends Component {
+  state = {
+    list: list
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="container">
+        <h1>ToDo List</h1>
+        <TodoList list={this.state.list} />
+        <TodoForm />
+        <button>Clear Completed</button>
       </div>
     );
   }
