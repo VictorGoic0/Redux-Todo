@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
+import { connect } from 'react-redux';
+import { addTodo } from './actions';
 
-const list = [
+const todos = [
   {
     task: 'Organize Garage',
     id: 1528817077286,
@@ -27,9 +29,12 @@ const list = [
 ];
 
 class App extends Component {
-  state = {
-    todos: [],
-    task: ''
+  constructor(props) {
+    super(props);
+    this.state = {
+      todos: [],
+      task: ''
+    }
   }
 
   handleChanges = e => {
@@ -39,16 +44,28 @@ class App extends Component {
     })
   }
 
+  addTodo = e => {
+    e.preventDefault();
+    this.props.addTodo(this.state.task)
+  }
+
   render() {
     return (
       <div className="container">
         <h1>ToDo List</h1>
-        <TodoList list={list} />
-        <TodoForm handleChanges={this.handleChanges} />
+        <TodoList todos={this.props.todos} />
+        <TodoForm handleChanges={this.handleChanges} addTodo={this.addTodo} task={this.state.task} />
         <button>Clear Completed</button>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        todos: state.todos,
+        task: state.task
+    };
+};
+
+export default connect(mapStateToProps, { addTodo })(App);
