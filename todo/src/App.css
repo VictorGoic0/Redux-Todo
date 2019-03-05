@@ -90,7 +90,7 @@ button {
   width: 200px;
   height: 40px;
   color: white;
-  background-color: #5917b1;
+  background-color: #0072ff;
   border: 2px solid black;
   border-radius: 6px;
   font-size: 1.8rem;
@@ -98,8 +98,8 @@ button {
 }
 
 button:hover {
-  color: #ff3366;
-  border: 2px solid #ff3366;
+  color: #ff0000;
+  border: 2px solid #ff0000;
   cursor: pointer;
 }
 
@@ -121,4 +121,8 @@ form input:focus {
 form {
   display: flex;
   flex-direction: column;
+}
+
+.cleared {
+	text-decoration: line-through;
 }
