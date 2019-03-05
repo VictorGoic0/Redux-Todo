@@ -4,29 +4,7 @@ import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import { connect } from 'react-redux';
 import { addTodo } from './actions';
-
-const todos = [
-  {
-    task: 'Organize Garage',
-    id: 1528817077286,
-    completed: false
-  },
-  {
-    task: 'Bake Cookies',
-    id: 1528817084358,
-    completed: false
-  },
-  {
-    task: 'Create TodoList',
-    id: 1528817084395,
-    completed: false
-  },
-  {
-    task: 'Learn Redux',
-    id: 1528817084975,
-    completed: false
-  }
-];
+import { toggleTodo } from './actions';
 
 class App extends Component {
   constructor(props) {
@@ -45,14 +23,20 @@ class App extends Component {
 
   addTodo = e => {
     e.preventDefault();
-    this.props.addTodo(this.state.task)
+    this.props.addTodo(this.state.task);
+    this.setState({ task: '' })
+  }
+
+  toggleTodo = id => {
+    this.props.toggleTodo(id);
+    console.log(this.props);
   }
 
   render() {
     return (
       <div className="container">
         <h1>ToDo List</h1>
-        <TodoList todos={this.props.todos} />
+        <TodoList todos={this.props.todos} toggleTodo={this.toggleTodo} />
         <TodoForm handleChanges={this.handleChanges} addTodo={this.addTodo} task={this.state.task} />
         <button>Clear Completed</button>
       </div>
@@ -62,9 +46,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        todos: [...todos, ...state.todos],
-        task: state.task
+        ...state
     };
 };
 
-export default connect(mapStateToProps, { addTodo })(App);
+export default connect(mapStateToProps, { addTodo, toggleTodo })(App);

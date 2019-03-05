@@ -111,6 +111,11 @@ form input {
   margin: 20px 20px 10px 30px;
   width: 200px;
   height: 30px;
+	outline: none;
+}
+
+form input:focus {
+	border: 2px solid #3b3ed4;
 }
 
 form {
