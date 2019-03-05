@@ -1,22 +1,23 @@
 import { ADDTODO } from '../actions';
 
 const initialState = {
-  task: '',
-  todos: []
+  todos: [],
+  task: ''
 }
 
 export const reducer = (state = initialState, action) => {
-  if (action.type === ADDTODO) {
+  switch (action.type) {
+    case ADDTODO:
     const newTodo = {
       task: action.payload,
       id: Date.now(),
       completed: false
     }
-    return {
-      todos: [...state.todos, newTodo]
-    }
+      return {
+        todos: [...state.todos, newTodo]
+      }
+
+    default:
+      return state;
   }
-    else {
-      return state
-    }
 }

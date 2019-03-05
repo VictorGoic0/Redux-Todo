@@ -32,7 +32,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: [],
       task: ''
     }
   }
@@ -63,7 +62,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        todos: state.todos,
+        todos: [...todos, ...state.todos],
         task: state.task
     };
 };
