@@ -1,4 +1,4 @@
-import { ADDTODO, TOGGLETODO } from '../actions';
+import { ADDTODO, TOGGLETODO, CLEAR } from '../actions';
 
 const initialState = {
   todos: [{
@@ -47,6 +47,12 @@ export const reducer = (state = initialState, action) => {
             }
           } return todo
         })
+      }
+
+    case CLEAR:
+      return {
+        ...state,
+        todos: state.todos.filter(input => !input.completed)
       }
 
     default:

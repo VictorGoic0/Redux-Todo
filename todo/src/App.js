@@ -3,8 +3,7 @@ import './App.css';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import { connect } from 'react-redux';
-import { addTodo } from './actions';
-import { toggleTodo } from './actions';
+import { addTodo, toggleTodo, clearCompleted } from './actions';
 
 class App extends Component {
   constructor(props) {
@@ -29,7 +28,10 @@ class App extends Component {
 
   toggleTodo = id => {
     this.props.toggleTodo(id);
-    console.log(this.props);
+  }
+
+  clearCompleted = () => {
+    this.props.clearCompleted();
   }
 
   render() {
@@ -38,7 +40,7 @@ class App extends Component {
         <h1>ToDo List</h1>
         <TodoList todos={this.props.todos} toggleTodo={this.toggleTodo} />
         <TodoForm handleChanges={this.handleChanges} addTodo={this.addTodo} task={this.state.task} />
-        <button>Clear Completed</button>
+        <button onClick={this.clearCompleted}>Clear Completed</button>
       </div>
     );
   }
@@ -50,4 +52,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { addTodo, toggleTodo })(App);
+export default connect(mapStateToProps, { addTodo, toggleTodo, clearCompleted })(App);
