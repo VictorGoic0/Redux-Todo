@@ -1,4 +1,4 @@
-import { ADDTODO, TOGGLETODO, CLEAR } from '../actions';
+import { ADD_TODO, TOGGLE_TODO, CLEAR_TODOS } from '../actions';
 
 const initialState = {
   todos: [{
@@ -25,7 +25,7 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADDTODO:
+    case ADD_TODO:
     const newTodo = {
       task: action.payload,
       id: Date.now(),
@@ -34,26 +34,26 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         todos: [...state.todos, newTodo]
-      }
+      };
 
-    case TOGGLETODO:
+    case TOGGLE_TODO:
       return {
         ...state,
         todos: state.todos.map(todo => {
           if (todo.id === action.payload) {
             return {
               ...todo,
-              completed: !state.completed
+              completed: !todo.completed
             }
-          } return todo
+          } return todo;
         })
-      }
+      };
 
-    case CLEAR:
+    case CLEAR_TODOS:
       return {
         ...state,
         todos: state.todos.filter(input => !input.completed)
-      }
+      };
 
     default:
       return state;

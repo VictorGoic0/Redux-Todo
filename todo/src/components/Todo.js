@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { toggleTodo } from '../actions';
 
-const Todo = props => {
-  return (
-    <div onClick={() => props.toggleTodo(props.todo.id)} className={props.todo.completed ? `cleared` : ``}>
-      <li>{props.todo.task}</li>
-    </div>
-  )
+class Todo extends Component {
+
+  toggleTodo = id => {
+    this.props.toggleTodo(id);
+  }
+
+  render() {
+    return (
+      <div onClick={() => this.toggleTodo(this.props.todo.id)} className={this.props.todo.completed ? `cleared` : ``}>
+        <li>{this.props.todo.task}</li>
+      </div>
+    )
+  }
 }
 
-export default Todo;
+const mapStateToProps = (state) => {
+    return {
+        ...state
+    };
+};
+
+export default connect(mapStateToProps, { toggleTodo })(Todo);
