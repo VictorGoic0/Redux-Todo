@@ -11,7 +11,7 @@ const TodoList = props => {
 
 const mapStateToProps = (state) => {
     return {
-        ...state
+        todos: state.todos
     };
 };
 

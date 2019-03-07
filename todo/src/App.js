@@ -23,10 +23,4 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        ...state
-    };
-};
-
-export default connect(mapStateToProps, { clearCompleted })(App);
+export default connect(null, { clearCompleted })(App);
